@@ -1,18 +1,17 @@
-<!--- todo.component.html --->
 <h1>Liste de tâches</h1>
 
 <input #searchInput type="search" placeholder="Rechercher" incremental (search)="onSearch(searchInput.value)">
 
 <div style="height: 8px"></div>
 
-<div style="background-color: #c0c0c0; padding: 16px;">
+<div style="padding: 16px;">
     <h3>À faire</h3>    
-    <todo-item *ngFor="let todo of notCompletedTodos" [id]="todo.id"></todo-item>
+    <div *ngFor="let todo of notCompletedTodos">{{todo.title}}</div>
 </div>
 
 <div style="height: 8px"></div>
 
-<div style="background-color: #c0c0c0; padding: 16px;">
+<div style="padding: 16px;">
     <h3>Complété</h3>    
-    <todo-item *ngFor="let todo of completedTodos" [id]="todo.id"></todo-item>
+    <div *ngFor="let todo of completedTodos">{{todo.title}}</div>
 </div> 
