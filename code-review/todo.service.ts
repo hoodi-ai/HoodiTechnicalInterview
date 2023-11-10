@@ -1,10 +1,17 @@
+/*** todo.service.ts ***/
 import { Injectable } from '@angular/core';
-import { Todo } from './todo.types';
+
+export type Todo =
+{
+  id?: string,
+  title?: string,
+  completed?: boolean
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class TodoEndpoint
+export class TodoService 
 {
   constructor() {}
 
@@ -20,7 +27,7 @@ export class TodoEndpoint
     });
   }
 
-  GetTodo(id: string)
+  async GetTodo(id: string)
   {
     return new Promise<any>((resolve) =>
     {
@@ -29,15 +36,6 @@ export class TodoEndpoint
         {
           response.json().then((todos) => resolve(todos));
         });
-    });
-  }
-
-  UpdateTodo(todo: Todo)
-  {
-    return new Promise<any>((resolve) =>
-    {
-      // This is a placeholder only, don't review this code
-      setTimeout(() => resolve("Update succeeded"), 100);
     });
   }
 }

@@ -1,8 +1,6 @@
+/*** todo.component.ts ***/
 import { Component, OnInit } from '@angular/core';
-import { Todo } from '../todo.types';
-import { TodoStore } from '../todo.store';
-import { map } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Todo, TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-todo',
@@ -10,47 +8,41 @@ import { Subject } from 'rxjs';
 })
 export class TodoComponent implements OnInit 
 {
-  notCompletedTodos = new Array<Todo>();
-  completedTodos = new Array<Todo>();
+  todos = new Array<Todo>();
 
-  private searchValue$ = new Subject<string | undefined>();
+  get notCompletedTodos()
+  {
+    return this.todos.filter(todo => !todo.completed && this._doMatchSearchValue(todo));
+  }
 
-  constructor(private todoStore: TodoStore) {}
+  get completedTodos()
+  {
+    return this.todos.filter(todo => todo.completed && this._doMatchSearchValue(todo));
+  }
+
+  private _searchValue = "";
+
+  constructor(private todoService: TodoService) {}
 
   ngOnInit(): void 
   {
-    this.todoStore.LoadTodos();
-
-    this.todoStore.todos$.pipe(
-      map(todos => todos.filter(todo => todo.completed))
-    ).subscribe(todos => this.completedTodos = todos);
-
-    this.todoStore.todos$.pipe(
-      map(todos => todos.filter(todo => !todo.completed))
-    ).subscribe(todos => this.notCompletedTodos = todos);
-
-    this.searchValue$.subscribe(searchValue =>
-    {
-      this.completedTodos = this.completedTodos.filter(todo => this.DoMatchSearchValue(todo, searchValue));
-      this.notCompletedTodos = this.notCompletedTodos.filter(todo => this.DoMatchSearchValue(todo, searchValue));
-    });
+    this.todoService.ListTodos().then(todos => this.todos = todos);
   }
 
   onSearch(searchValue: string)
   {
-    this.searchValue$.next(searchValue);
+    this._searchValue = searchValue;
   }
 
-  private DoMatchSearchValue(todo: Todo, searchValue: string | undefined): boolean
+  private _doMatchSearchValue(todo: Todo): boolean
   {
     let searchTokens = 
-      searchValue?.toLowerCase().split(' ').filter(searchToken => searchToken.length > 0);
+      this._searchValue.toLowerCase().split(' ').filter(searchToken => searchToken.length > 0);
 
-    for (let token of searchTokens || [])
+    for (let token of searchTokens)
       if (!todo.title?.toLowerCase().includes(token))
         return false;
 
     return true;
   }
 }
-
