@@ -36,10 +36,10 @@ export class TodoComponent implements OnInit
 
   private _doMatchSearchValue(todo: Todo): boolean
   {
-    let searchTokens = 
+    var searchTokens = 
       this._searchValue.toLowerCase().split(' ').filter(searchToken => searchToken.length > 0);
 
-    for (let token of searchTokens)
+    for (var token of searchTokens)
       if (!todo.title?.toLowerCase().includes(token))
         return false;
 
