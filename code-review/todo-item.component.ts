@@ -4,11 +4,7 @@ import { Todo, TodoService } from '../todo.service';
 
 @Component({
   selector: 'todo-item',
-  template: `
-    <div style="background-color: cornflowerblue;">
-      <h4>{{todo?.title}}<span *ngIf="todo?.completed"> ✓</span></h4>
-    </div>
-  `
+  templateUrl: './todo-item.component.html'
 })
 export class TodoItemComponent implements OnInit 
 {
