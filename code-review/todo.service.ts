@@ -27,7 +27,7 @@ export class TodoService
     });
   }
 
-  async GetTodo(id: string)
+  GetTodo(id: string)
   {
     return new Promise<any>((resolve) =>
     {
