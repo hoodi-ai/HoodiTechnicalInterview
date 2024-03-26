@@ -1,0 +1,11 @@
+Design l'architecture high level de l'application suivante :
+
+Carnet d'entretien automobile
+
+- L'utilisateur peut ajouter, modifier et supprimer différentes tâches d'entretien pour son automobile. 
+- Pour chaque tâche, l'utilisateur doit pouvoir entrer un nom, une description et une récurrence en temps et/ou en kilomètre. (par exemple: Changement d'huile tous les 6 mois ou 10 000km)
+- L'utilisateur doit pouvoir consulter un calendrier de toutes les tâches d'entretien à venir (par exemple : prochain changement d'huile prévu en mars ou dans 7000km)
+- Pour chaque tâche, l'utilisateur doit pouvoir dire que le prochain entretien a été complétée. 
+  Il doit indiqué à quelle date l'entretien a été complété et il peut optionnellement ajouter des documents comme des factures au même moment.
+- Pour chaque tâche, l'utilisateur doit pouvoir consulter l'historique de toutes les occurences qui ont été complétés.
+

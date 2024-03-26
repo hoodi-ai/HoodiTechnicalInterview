@@ -12,5 +12,5 @@
 
 function FindTwoNumbersThatSumsToTarget(numbers: number[], target: number): number[]
 {
-
+  return [];
 }
