@@ -16,15 +16,41 @@
 
 // L'utilisateur doit avoir l'option de ne plus voir la bannière jusqu'au prochain renouvellement.
 
+// Dans notre exemple précédent, si l'utilisateur ferme la bannière n'importe quand durant le mois de mars, avril ou mai 2024,  
+// il ne doit plus voir la bannière avant mars 2025
+
 // ---------------------
 // QUESTION 
 
-// Comment implémenterais tu cette fonctionnalité ? 
+//  Complète le service suivant : 
 
-// En particulier : 
+export interface UserPrefs
+{
+  InsuranceRenewalMonth?: number,
+  RenewalNotificationPref?: any 
+}
 
-// Quel logique implémenterais tu pour savoir si on doit afficher la bannière ou non ?
-// Quel logique implémenterais tu lorsque l'utilisateur décide de ne plus voir la bannière ?
+class InsuranceRenewalNotificationService
+{
+  private readonly NOTIFICATION_PERIOD_IN_MONTHS = 3;
+
+  private userPrefs: UserPrefs;
+
+  constructor(userPrefs: UserPrefs)
+  {
+    this.userPrefs = userPrefs;
+  }
+
+  public ShouldShowNotificationBanner(): boolean
+  {
+    return false;
+  }
+
+  public OnNotificationBannerClosed(): void
+  {
+
+  }
+}
 
 
 
